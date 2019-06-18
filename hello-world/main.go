@@ -2,10 +2,12 @@ package main
 
 import (
 	"fmt"
+	"runtime"
 	"sync"
 )
 
-func HelloWorld() {
+func main() {
+	runtime.GOMAXPROCS(runtime.NumCPU())
 	wg := new(sync.WaitGroup)
 
 	wg.Add(1)

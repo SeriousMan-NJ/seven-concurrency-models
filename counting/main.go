@@ -36,7 +36,7 @@ func (c *Counter2) GetCount() int {
 	return tmp
 }
 
-func Counting() {
+func main() {
 	counter := new(Counter)
 	counter2 := new(Counter2)
 	wg := new(sync.WaitGroup)

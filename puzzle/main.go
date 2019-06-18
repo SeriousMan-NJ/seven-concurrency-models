@@ -2,10 +2,13 @@ package main
 
 import (
 	"fmt"
+	"runtime"
 	"sync"
 )
 
-func Puzzle() {
+func main() {
+	runtime.GOMAXPROCS(runtime.NumCPU())
+
 	answerReady := false
 	answer := 0
 

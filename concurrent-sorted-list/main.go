@@ -85,7 +85,7 @@ func (l *ConcurrentSortedList) Print() {
 	}
 }
 
-func ConcurrentSortedListMain() {
+func main() {
 	l := NewConcurrentSortedList()
 	wg := new(sync.WaitGroup)
 
