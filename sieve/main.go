@@ -22,24 +22,23 @@ func getPrimes(limit int) chan int {
 		for {
 			prime, ok := <-ch
 
-			if ok {
-				tmp := make(chan int)
-
-				primes <- prime
-
-				go func(ch chan int, prime int, tmp chan int) {
-					for n := range ch {
-						if n%prime != 0 {
-							tmp <- n
-						}
-					}
-					close(tmp)
-				}(ch, prime, tmp)
-				ch = tmp
-			} else {
+			if !ok {
 				close(primes)
 				return
 			}
+
+			primes <- prime
+			tmp := make(chan int)
+
+			go func(ch chan int, prime int, tmp chan int) {
+				for n := range ch {
+					if n%prime != 0 {
+						tmp <- n
+					}
+				}
+				close(tmp)
+			}(ch, prime, tmp)
+			ch = tmp
 		}
 	}()
 
